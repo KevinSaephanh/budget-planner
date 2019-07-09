@@ -1,33 +1,15 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
-import ItemForm from "./ItemForm";
 import "react-table/react-table.css";
 
 class Table extends Component {
-  constructor(props) {
-    super(props);
-
-    if (props !== null) {
-      this.state = {
-        items: props.items
-      };
-    } else {
-      this.state = {
-        items: []
-      };
-    }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      items: nextProps.items
+    });
   }
 
-  onClick = newItem => {
-    let items = this.state.items;
-    items.push(newItem);
-
-    this.setState({
-      items: items
-    });
-  };
-
-  deleteRow(id) {
+  onDelete(id) {
     const index = this.state.items.findIndex(item => {
       return item.id === id;
     });
@@ -37,12 +19,13 @@ class Table extends Component {
     this.setState({
       items: items
     });
+    this.props.onDelete(this.state.items);
   }
 
-  onSave() {
+  onSave = e => {
     console.log("Data successfully saved");
     this.props.onSave(this.state.items);
-  }
+  };
 
   render() {
     const columns = [
@@ -72,7 +55,7 @@ class Table extends Component {
         filterable: false,
         Cell: props => {
           return (
-            <button onClick={() => this.deleteRow(props.original.id)}>
+            <button onClick={() => this.onDelete(props.original.id)}>
               Delete
             </button>
           );
@@ -83,11 +66,10 @@ class Table extends Component {
 
     return (
       <div className="row">
-        <ItemForm onClick={this.onClick} />
         <div style={{ margin: 10 }}>
           <ReactTable
             columns={columns}
-            data={this.state.items}
+            data={this.props.items}
             noDataText={"No data found"}
             filterable
             defaultPageSize={10}

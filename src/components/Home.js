@@ -22,7 +22,7 @@ class Home extends Component {
 
         window.location = `/${data[index]._id}`;
       })
-      .catch(err => console.log(err));
+      .catch(err => alert("404: Budget could not be found"));
   };
 
   render() {

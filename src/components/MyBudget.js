@@ -1,17 +1,13 @@
 import React, { Component } from "react";
+import BudgetForm from "./BudgetForm";
+import ItemForm from "./ItemForm";
 import Table from "./Table";
 
 class MyBudget extends Component {
-  state = {
-    title: String,
-    budget: Number,
-    start: Date,
-    end: Date,
-    items: []
-  };
+  state = {};
 
   componentDidMount() {
-    fetch(`http://localhost:5000/budgets/${this.props.match.params.id}`)
+    fetch(`http://localhost:3000/budgets/${this.props.match.params.id}`)
       .then(res => res.json())
       .then(data => {
         this.setState({
@@ -25,8 +21,45 @@ class MyBudget extends Component {
       .catch(err => console.log(err));
   }
 
+  onChange = e => {
+    const target = e.target.name;
+    if (target === "start" || target === "end") {
+      const date = new Date(e.target.value);
+      const formattedDate = `${date.getMonth() + 1}/${date.getDate() +
+        1}/${date.getFullYear()}`;
+
+      this.setState({
+        [target]: formattedDate
+      });
+    } else {
+      this.setState({
+        [target]: e.target.value
+      });
+    }
+  };
+
+  onClick = newItem => {
+    let items = this.state.items;
+    items.push(newItem);
+
+    this.setState({
+      items: items
+    });
+  };
+
+  onDelete = items => {
+    this.setState({
+      items: items
+    });
+  };
+
   onSave = items => {
-    fetch("http://localhost:3000/budgets/create", {
+    if (this.state.start > this.state.end) {
+      alert("Start date must be before end date");
+      return;
+    }
+
+    fetch(`http://localhost:3000/budgets/update/${this.props.match.params.id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -40,14 +73,23 @@ class MyBudget extends Component {
       .then(res => res.json())
       .then(() => console.log("Budget saved!"))
       .catch(err => console.log(err));
-
-    window.location = "/";
   };
 
   render() {
     return (
       <div className="row">
-        <Table onSave={this.onSave} />
+        <h1>{this.state.title}</h1>
+        <h3>Budget: ${this.state.budget}</h3>
+        <h3>
+          Start: {this.state.start} End: {this.state.end}
+        </h3>
+        <BudgetForm onChange={this.onChange} />
+        <ItemForm onClick={this.onClick} />
+        <Table
+          items={this.state.items}
+          onDelete={this.onDelete}
+          onSave={this.onSave}
+        />
       </div>
     );
   }
