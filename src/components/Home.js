@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-export default class ExpensesList extends Component {
+class Home extends Component {
   state = {
-    title: ""
+    title: String
   };
 
   onChange = e => {
@@ -11,16 +11,19 @@ export default class ExpensesList extends Component {
     });
   };
 
-  onSubmit() {
-    fetch(`http://localhost:3000/budgets/${this.state.title}`).then(res =>
-      console
-        .log(res.json())
-        .then(() => {
-          window.location = `/`;
-        })
-        .catch(err => console.log(err))
-    );
-  }
+  onClick = e => {
+    e.preventDefault();
+    fetch("http://localhost:3000/budgets/")
+      .then(res => res.json())
+      .then(data => {
+        const index = data.findIndex(budget => {
+          return budget.title === this.state.title;
+        });
+
+        window.location = `/${data[index]._id}`;
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -34,10 +37,10 @@ export default class ExpensesList extends Component {
             type="text"
             placeholder="Enter budget title"
             maxLength="15"
-            name="budgetTitle"
+            name="title"
             onChange={this.onChange}
           />
-          <button type="submit" name="search" onClick={this.onClick}>
+          <button type="submit" onClick={this.onClick}>
             Search
           </button>
         </form>
@@ -45,3 +48,5 @@ export default class ExpensesList extends Component {
     );
   }
 }
+
+export default Home;

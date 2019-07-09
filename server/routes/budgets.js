@@ -11,8 +11,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  const name = req.params.name;
-  Budget.findById(name, (err, budget) => {
+  Budget.findById(req.params.id, (err, budget) => {
     if (err) {
       res.status(400).json("Error: " + err);
     } else {

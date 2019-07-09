@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import Table from "./Table";
 
-export default class MyBudget extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      title: String,
-      budget: Number,
-      start: Date,
-      end: Date
-    };
-  }
+class MyBudget extends Component {
+  state = {
+    title: String,
+    budget: Number,
+    start: Date,
+    end: Date,
+    items: []
+  };
 
   componentDidMount() {
     fetch(`http://localhost:5000/budgets/${this.props.match.params.id}`)
@@ -21,7 +18,8 @@ export default class MyBudget extends Component {
           title: data.title,
           budget: data.budget,
           start: data.start,
-          end: data.end
+          end: data.end,
+          items: data.items
         });
       })
       .catch(err => console.log(err));
@@ -40,7 +38,7 @@ export default class MyBudget extends Component {
       })
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(() => console.log("Budget saved!"))
       .catch(err => console.log(err));
 
     window.location = "/";
@@ -48,9 +46,11 @@ export default class MyBudget extends Component {
 
   render() {
     return (
-      <div>
-        <Table items={this.state} onSave={this.onSave} />
+      <div className="row">
+        <Table onSave={this.onSave} />
       </div>
     );
   }
 }
+
+export default MyBudget;

@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <BrowserRouter>
@@ -23,3 +23,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

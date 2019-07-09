@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BudgetForm from "./BudgetForm";
 import Table from "./Table";
 
-export default class CreateBudget extends Component {
+class CreateBudget extends Component {
   state = {
     title: String,
     budget: Number,
@@ -29,7 +29,7 @@ export default class CreateBudget extends Component {
       })
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(() => console.log("Budget saved!"))
       .catch(err => console.log(err));
 
     window.location = "/";
@@ -45,3 +45,5 @@ export default class CreateBudget extends Component {
     );
   }
 }
+
+export default CreateBudget;

@@ -27,7 +27,7 @@ class ItemForm extends Component {
         name: this.state.name,
         cost: this.state.cost
       };
-      this.props.handleClick(newItem);
+      this.props.onClick(newItem);
       this.refs.name.value = "";
       this.refs.cost.value = 0;
     }
