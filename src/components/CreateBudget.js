@@ -13,9 +13,15 @@ class CreateBudget extends Component {
   };
 
   onChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    if (e.target.name === "budget") {
+      this.setState({
+        budget: parseFloat(e.target.value).toFixed(2)
+      });
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
   };
 
   onClick = newItem => {

@@ -66,7 +66,7 @@ class Table extends Component {
 
     return (
       <div className="row">
-        <div style={{ margin: 10 }}>
+        <div>
           <ReactTable
             columns={columns}
             data={this.props.items}
@@ -75,12 +75,7 @@ class Table extends Component {
             defaultPageSize={10}
             showPagination={false}
           />
-          <button
-            type="submit"
-            name="save"
-            style={{ margin: 25 }}
-            onClick={this.onSave}
-          >
+          <button type="submit" name="save" onClick={this.onSave}>
             Save
           </button>
         </div>

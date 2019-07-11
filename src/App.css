@@ -34,7 +34,6 @@ nav .navbar-brand {
 h2,
 h3,
 form,
-table,
 .btn-timeRange {
   margin: 25px 0 25px 0;
 }
@@ -61,6 +60,30 @@ table,
   background: rgb(116, 174, 192);
   border: black 3px solid;
   border-radius: 5px;
+}
+
+.row h3 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding-top: 50px;
+}
+
+.row ul {
+  list-style-type: none;
+  text-align: left;
+  border: 7px solid black;
+  border-radius: 5%;
+  width: 50vw;
+  margin: 50px auto;
+}
+
+.row ul li {
+  margin: 30px;
+  font-size: 1.7rem;
+}
+
+.row ul li:hover {
+  color: black;
 }
 
 .form-budget {

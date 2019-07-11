@@ -31,9 +31,13 @@ class MyBudget extends Component {
       this.setState({
         [target]: formattedDate
       });
+    } else if (e.target.name === "budget") {
+      this.setState({
+        budget: parseFloat(e.target.value).toFixed(2)
+      });
     } else {
       this.setState({
-        [target]: e.target.value
+        [e.target.name]: e.target.value
       });
     }
   };
@@ -59,20 +63,38 @@ class MyBudget extends Component {
       return;
     }
 
-    fetch(`http://localhost:3000/budgets/update/${this.props.match.params.id}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: this.state.title,
-        budget: this.state.budget,
-        start: this.state.start,
-        end: this.state.end,
-        items: items
-      })
-    })
+    fetch(
+      `http://localhost:3000/budgets/update/${this.props.match.params.id}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: this.state.title,
+          budget: this.state.budget,
+          start: this.state.start,
+          end: this.state.end,
+          items: items
+        })
+      }
+    )
       .then(res => res.json())
       .then(() => console.log("Budget saved!"))
       .catch(err => console.log(err));
+
+    window.location = "/";
+  };
+
+  onDeleteBudget = e => {
+    fetch(`http://localhost:3000/budgets/${this.props.match.params.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: this.props.match.params.id })
+    })
+      .then(res => res.json())
+      .then(() => console.log("Budget deleted!"))
+      .catch(err => console.log(err));
+
+    window.location = "/";
   };
 
   render() {
@@ -90,6 +112,13 @@ class MyBudget extends Component {
           onDelete={this.onDelete}
           onSave={this.onSave}
         />
+        <button
+          type="submit"
+          onClick={this.onDeleteBudget}
+          style={{ marginTop: 25 }}
+        >
+          Delete
+        </button>
       </div>
     );
   }
