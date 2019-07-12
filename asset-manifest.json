@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Budget-Planner/static/css/main.83ca1387.chunk.css",
+    "main.js": "/Budget-Planner/static/js/main.eee17f62.chunk.js",
+    "main.js.map": "/Budget-Planner/static/js/main.eee17f62.chunk.js.map",
+    "runtime~main.js": "/Budget-Planner/static/js/runtime~main.15c6a78a.js",
+    "runtime~main.js.map": "/Budget-Planner/static/js/runtime~main.15c6a78a.js.map",
+    "static/css/2.505e3219.chunk.css": "/Budget-Planner/static/css/2.505e3219.chunk.css",
+    "static/js/2.1769b8ef.chunk.js": "/Budget-Planner/static/js/2.1769b8ef.chunk.js",
+    "static/js/2.1769b8ef.chunk.js.map": "/Budget-Planner/static/js/2.1769b8ef.chunk.js.map",
+    "index.html": "/Budget-Planner/index.html",
+    "precache-manifest.a5f9a8118c7ee766f32a50c6c7e678c3.js": "/Budget-Planner/precache-manifest.a5f9a8118c7ee766f32a50c6c7e678c3.js",
+    "service-worker.js": "/Budget-Planner/service-worker.js",
+    "static/css/2.505e3219.chunk.css.map": "/Budget-Planner/static/css/2.505e3219.chunk.css.map",
+    "static/css/main.83ca1387.chunk.css.map": "/Budget-Planner/static/css/main.83ca1387.chunk.css.map",
+    "static/media/logo.png": "/Budget-Planner/static/media/logo.75dee830.png"
+  }
+}
