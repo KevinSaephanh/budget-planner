@@ -8,7 +8,10 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
 mongoose
-  .connect(db.mongoURI, { useNewUrlParser: true, useCreateIndex: true })
+  .connect(process.env.MONGODB_URI || db.mongoURI, {
+    useNewUrlParser: true,
+    useCreateIndex: true
+  })
   .then(() => {
     console.log("MongoDB connection successful");
   })
